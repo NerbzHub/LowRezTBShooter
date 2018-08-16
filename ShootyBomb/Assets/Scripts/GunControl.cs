@@ -8,22 +8,22 @@ public class GunControl : MonoBehaviour {
 	public GameObject m_ShootPoint;
 	public Camera m_MainCam;
 	public float m_ShootPower;
+
 	private Vector3 m_MousePos;
 	private Vector3 m_ObjectPos;
 	private float m_GunAngle;
 	// Use this for initialization
 	void Start () 
 	{
+		
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		CalcRotation();
-		if(Input.GetKeyDown(KeyCode.Mouse0))
-		{
-			Shoot();
-		}
+		InputCheck();
+		
 	}
 
 	// Was struggling to get the rotation of the gun right.
@@ -31,7 +31,6 @@ public class GunControl : MonoBehaviour {
 	// This forum post helped me out.
 	private void CalcRotation()
 	{
-		
          m_MousePos = Input.mousePosition;
          m_MousePos.z = 5.23f;
  
@@ -49,5 +48,13 @@ public class GunControl : MonoBehaviour {
 
 		bullet.GetComponent<Rigidbody2D>().AddForce((new Vector2(m_MousePos.x, m_MousePos.y).normalized * m_ShootPower), ForceMode2D.Impulse);
 
+	}
+
+	private void InputCheck()
+	{
+		if(Input.GetKeyDown(KeyCode.Mouse0))
+		{
+			Shoot();
+		}
 	}
 }
